@@ -1,0 +1,124 @@
+{
+  "paths" : {
+    "\/users" : {
+      "post" : {
+        "deprecated" : false,
+        "tags" : [
+          "User"
+        ],
+        "responses" : {
+          "401" : {
+            "description" : "User not authorized"
+          },
+          "200" : {
+            "description" : "User data after adding to the system"
+          }
+        },
+        "description" : "Action for adding new user to the server",
+        "security" : [
+          {
+            "auth_jwt" : [
+
+            ]
+          }
+        ],
+        "summary" : "Adding new user"
+      }
+    },
+    "\/version" : {
+      "get" : {
+        "deprecated" : false,
+        "tags" : [
+          "User"
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "Specific user"
+          }
+        },
+        "description" : "Action for getting application current version",
+        "summary" : "Getting system version"
+      }
+    },
+    "\/users\/{id}" : {
+      "get" : {
+        "security" : [
+          {
+            "auth_jwt" : [
+
+            ]
+          }
+        ],
+        "summary" : "Getting user by id",
+        "deprecated" : false,
+        "responses" : {
+          "200" : {
+            "description" : "Specific user"
+          },
+          "404" : {
+            "description" : "User with entered id not exists"
+          },
+          "401" : {
+            "description" : "User not authorized"
+          }
+        },
+        "description" : "Action for getting specific user from server",
+        "tags" : [
+          "User"
+        ],
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "User id",
+            "required" : true,
+            "name" : "id"
+          }
+        ]
+      }
+    }
+  },
+  "servers" : [
+
+  ],
+  "openapi" : "3.0.1",
+  "info" : {
+    "termsOfService" : "http:\/\/example.com\/terms\/",
+    "contact" : {
+      "name" : "John Doe",
+      "url" : "http:\/\/example-domain.com\/@john",
+      "email" : "john.doe@some-email.org"
+    },
+    "title" : "Tasker server API",
+    "license" : {
+      "name" : "MIT",
+      "url" : "http:\/\/mit.license"
+    },
+    "description" : "This is a sample server for task server application.",
+    "version" : "1.0.0"
+  },
+  "tags" : [
+    {
+      "name" : "User",
+      "description" : "Controller where we can manage users"
+    }
+  ],
+  "components" : {
+    "schemas" : {
+
+    },
+    "securitySchemes" : {
+      "auth_jwt" : {
+        "bearerFormat" : "jwt",
+        "in" : "header",
+        "type" : "http",
+        "description" : "You can get token from *sign-in* action from *Account* controller.",
+        "scheme" : "bearer"
+      }
+    }
+  }
+}

@@ -1,0 +1,714 @@
+{
+  "paths" : {
+    "\/api\/v2\/login\/{email}\/{password_hash}" : {
+      "get" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "Created user object",
+            "required" : true,
+            "name" : "email"
+          },
+          {
+            "schema" : {
+              "type" : "string"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "Created user object",
+            "required" : true,
+            "name" : "password_hash"
+          }
+        ],
+        "tags" : [
+          "Auth"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application\/json" : {
+                "schema" : {
+                  "$ref" : "#\/components\/schemas\/TokensID"
+                }
+              }
+            },
+            "description" : "Successful operation"
+          },
+          "400" : {
+            "description" : "Invalid login or password"
+          }
+        },
+        "description" : "Created user object",
+        "summary" : "Login user"
+      }
+    },
+    "\/api\/v2\/films\/filtering_param\/{genre}" : {
+      "get" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string"
+            },
+            "allowEmptyValue" : true,
+            "in" : "path",
+            "name" : "genre",
+            "required" : true,
+            "deprecated" : false
+          }
+        ],
+        "tags" : [
+          "Films"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application\/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#\/components\/schemas\/FilmDTO"
+                  }
+                }
+              }
+            },
+            "description" : "Successful operation"
+          },
+          "404" : {
+            "description" : "Genre not found"
+          }
+        },
+        "description" : "filtering by existing genres",
+        "summary" : "filtering"
+      }
+    },
+    "\/api\/v2\/jwt\/check_jwt\/{access_token}" : {
+      "get" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "Access token",
+            "required" : true,
+            "name" : "access_token"
+          }
+        ],
+        "tags" : [
+          "Auth"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application\/json" : {
+                "schema" : {
+                  "$ref" : "#\/components\/schemas\/TokenResponse"
+                }
+              }
+            },
+            "description" : "Successful operation"
+          },
+          "401" : {
+            "description" : "Invalid refresh token, need authorization"
+          }
+        },
+        "description" : "Updates access token using refresh token",
+        "summary" : "Update token"
+      }
+    },
+    "\/api\/v2\/reviews\/jwt\/update\/{film_id}\/{new_review}" : {
+      "get" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "film id",
+            "required" : true,
+            "name" : "film_id"
+          },
+          {
+            "schema" : {
+              "type" : "string"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "new review text",
+            "required" : true,
+            "name" : "new_review"
+          }
+        ],
+        "tags" : [
+          "Review"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "404" : {
+            "description" : "Review\/Film not found"
+          },
+          "200" : {
+            "description" : "Successful operation"
+          }
+        },
+        "description" : "update review",
+        "summary" : "update review"
+      }
+    },
+    "\/api\/v2\/user\/id" : {
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application\/json" : {
+              "schema" : {
+                "$ref" : "#\/components\/schemas\/UserUpdate"
+              }
+            }
+          },
+          "required" : false
+        },
+        "summary" : "update user",
+        "deprecated" : false,
+        "responses" : {
+          "404" : {
+            "description" : "User not found"
+          },
+          "401" : {
+            "description" : "Invalid user id supplied"
+          },
+          "200" : {
+            "description" : "Successful operation"
+          }
+        },
+        "description" : "update user by id",
+        "tags" : [
+          "User"
+        ],
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            },
+            "in" : "header",
+            "allowEmptyValue" : false,
+            "deprecated" : true,
+            "description" : "user token",
+            "required" : true,
+            "name" : "access_token"
+          }
+        ]
+      }
+    },
+    "\/api\/v2\/reviews\/jwt\/delete\/{review_id}" : {
+      "delete" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "review id",
+            "required" : true,
+            "name" : "review_id"
+          }
+        ],
+        "tags" : [
+          "Review"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "404" : {
+            "description" : "Review not found"
+          },
+          "200" : {
+            "description" : "Successful operation"
+          }
+        },
+        "description" : "delete review by id",
+        "summary" : "delete review"
+      }
+    },
+    "\/api\/v2\/reviews\/jwt\/make\/{film_id}\/{text}" : {
+      "get" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "film id",
+            "required" : true,
+            "name" : "film_id"
+          },
+          {
+            "schema" : {
+              "type" : "string"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "review text",
+            "required" : true,
+            "name" : "text"
+          }
+        ],
+        "tags" : [
+          "Review"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "404" : {
+            "description" : "Film not found"
+          }
+        },
+        "description" : "update review",
+        "summary" : "update review"
+      }
+    },
+    "\/api\/v2\/films" : {
+      "get" : {
+        "deprecated" : false,
+        "tags" : [
+          "Films"
+        ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application\/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#\/components\/schemas\/FilmDTO"
+                  }
+                }
+              }
+            },
+            "description" : "Successful operation"
+          }
+        },
+        "description" : "get all films",
+        "summary" : "get films"
+      }
+    },
+    "\/api\/v2\/user\/id\/{access_token}" : {
+      "get" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : true,
+            "description" : "user token",
+            "required" : true,
+            "name" : "access_token"
+          }
+        ],
+        "tags" : [
+          "User"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "401" : {
+            "description" : "Invalid access token"
+          },
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "404" : {
+            "description" : "User not found"
+          }
+        },
+        "description" : "get user by id",
+        "summary" : "get user"
+      },
+      "delete" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : true,
+            "description" : "user token",
+            "required" : true,
+            "name" : "access_token"
+          }
+        ],
+        "tags" : [
+          "User"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "401" : {
+            "description" : "Invalid user id supplied"
+          },
+          "404" : {
+            "description" : "User not found"
+          },
+          "200" : {
+            "description" : "Successful operation"
+          }
+        },
+        "description" : "delete user by id",
+        "summary" : "delete user"
+      }
+    },
+    "\/api\/v2\/email_reg" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application\/json" : {
+              "schema" : {
+                "$ref" : "#\/components\/schemas\/UserReg"
+              }
+            }
+          },
+          "required" : false,
+          "description" : "Объект пользователя для регистрации"
+        },
+        "summary" : "Register via email",
+        "deprecated" : false,
+        "responses" : {
+          "409" : {
+            "description" : "user already exists"
+          },
+          "200" : {
+            "description" : "successful operation"
+          }
+        },
+        "description" : "Register via email",
+        "tags" : [
+          "Auth"
+        ],
+        "security" : [
+          {
+            "auth_jwt" : [
+
+            ]
+          }
+        ]
+      }
+    },
+    "\/api\/v2\/films\/reviews\/{film_id}" : {
+      "get" : {
+        "parameters" : [
+          {
+            "schema" : {
+              "type" : "string",
+              "format" : "uuid"
+            },
+            "in" : "path",
+            "allowEmptyValue" : false,
+            "deprecated" : false,
+            "description" : "film id",
+            "required" : true,
+            "name" : "film_id"
+          }
+        ],
+        "tags" : [
+          "Films"
+        ],
+        "deprecated" : false,
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application\/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#\/components\/schemas\/ReviewDTO"
+                  }
+                }
+              }
+            },
+            "description" : "Successful operation"
+          }
+        },
+        "description" : "get all reviews by film id",
+        "summary" : "get reviews"
+      }
+    }
+  },
+  "servers" : [
+
+  ],
+  "openapi" : "3.0.1",
+  "info" : {
+    "termsOfService" : "http:\/\/example.com\/terms\/",
+    "contact" : {
+      "name" : "Kirill & Maria",
+      "url" : "https:\/\/www.google.ru\/",
+      "email" : "test@email.ru"
+    },
+    "title" : "Swagger documentation for Kino API",
+    "license" : {
+      "name" : "MIT",
+      "url" : "http:\/\/mit.license"
+    },
+    "description" : "This is a sample server for task server application.",
+    "version" : "2.0.0"
+  },
+  "tags" : [
+    {
+      "name" : "Auth",
+      "description" : "Authorization on Kino app"
+    },
+    {
+      "name" : "Films",
+      "description" : "film actions"
+    },
+    {
+      "name" : "Review",
+      "description" : "user review"
+    },
+    {
+      "name" : "User",
+      "description" : "user actions"
+    }
+  ],
+  "components" : {
+    "schemas" : {
+      "TokensID" : {
+        "type" : "object",
+        "properties" : {
+          "user_id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "818CC15C-5B2A-4464-84FF-B4057E638535"
+          },
+          "refresh_token" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "access_token" : {
+            "type" : "string",
+            "example" : "string"
+          }
+        },
+        "required" : [
+          "access_token",
+          "refresh_token"
+        ]
+      },
+      "UserRights" : {
+        "type" : "object",
+        "properties" : {
+          "rawValue" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 2
+          }
+        },
+        "required" : [
+          "rawValue"
+        ]
+      },
+      "TokenResponse" : {
+        "type" : "object",
+        "properties" : {
+          "refresh_token" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "access_token" : {
+            "type" : "string",
+            "example" : "string"
+          }
+        },
+        "required" : [
+          "access_token",
+          "refresh_token"
+        ]
+      },
+      "UUID" : {
+        "type" : "object",
+        "properties" : {
+          "uuid" : {
+            "type" : "string",
+            "example" : "DEDD046C-A6A1-49C1-95AC-002ED29777B6"
+          }
+        },
+        "required" : [
+          "uuid"
+        ]
+      },
+      "UserUpdate" : {
+        "type" : "object",
+        "properties" : {
+          "password" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "fio" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "token" : {
+            "type" : "string",
+            "example" : "string"
+          }
+        },
+        "required" : [
+          "token",
+          "fio",
+          "email",
+          "password"
+        ]
+      },
+      "UserDTO" : {
+        "type" : "object",
+        "properties" : {
+          "userRights" : {
+            "$ref" : "#\/components\/schemas\/UserRights"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "1A3A0CEC-2C7F-4183-B173-098071A64916"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "fio" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "passwordHash" : {
+            "type" : "string",
+            "example" : "string"
+          }
+        },
+        "required" : [
+          "reviews",
+          "email",
+          "passwordHash"
+        ]
+      },
+      "ReviewDTO" : {
+        "type" : "object",
+        "properties" : {
+          "text" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "75087EF0-CFDF-4460-8F28-68682A078EE6"
+          },
+          "film_id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "5D79E00A-BA26-4E2D-BC94-EB1E911374CB"
+          },
+          "user" : {
+            "$ref" : "#\/components\/schemas\/UserDTO"
+          }
+        },
+        "required" : [
+          "id",
+          "user",
+          "film_id",
+          "text"
+        ]
+      },
+      "FilmDTO" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "E1CD91E1-4413-4A34-9F67-A5E5EDDB3EC6"
+          },
+          "box_office" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 0
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "age_rating" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 0
+          },
+          "date" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : 673098465.66086698
+          }
+        },
+        "required" : [
+          "name",
+          "age_rating",
+          "box_office",
+          "date"
+        ]
+      },
+      "UserReg" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "example" : "string"
+          },
+          "password" : {
+            "type" : "string",
+            "example" : "string"
+          }
+        },
+        "required" : [
+          "email",
+          "password"
+        ]
+      }
+    },
+    "securitySchemes" : {
+      "auth_jwt" : {
+        "bearerFormat" : "jwt",
+        "in" : "header",
+        "type" : "http",
+        "description" : "You can get token from *sign-in* action from *Account* controller.",
+        "scheme" : "bearer"
+      }
+    }
+  }
+}
