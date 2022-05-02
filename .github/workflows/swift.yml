@@ -22,7 +22,7 @@ jobs:
           
       - name: Clean prev build
         run: |
-           xcodebuild clean build -workspace "Application.Application.xcworkspace" -scheme "Application" -destination "platform=iOS Simulator,name=iPhone 12 Pro,OS=latest" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+           xcodebuild clean build -workspace "Application/Application.xcworkspace" -scheme "Application" -destination "platform=iOS Simulator,name=iPhone 13 Pro,OS=latest" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
 
       - name: Setup - Xcode
         run: sudo xcode-select -s /Applications/Xcode.app
