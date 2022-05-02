@@ -6,7 +6,7 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  build 🛠:
+  build:
     runs-on: self-hosted
     timeout-minutes: 15
     steps:
