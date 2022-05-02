@@ -25,5 +25,5 @@ jobs:
         
       - name: clean build
         run: |
-          ls
-           # xcodebuild clean build -workspace "Application/Application.xcworkspace" -scheme "Application" -destination "platform=iOS Simulator,name=iPhone 13 Pro,OS=latest" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+          cd Application/
+          xcodebuild clean build -workspace "Application.xcworkspace" -scheme "Application" -destination "platform=iOS Simulator,name=iPhone 13 Pro,OS=latest" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
